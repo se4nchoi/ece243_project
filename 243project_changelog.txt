@@ -1,0 +1,13 @@
+# CHANGE LOG
+
+# Yea Hyun (Sean) Choi 		choiyea		999763448
+# Seunghyun Cho	 			choseun3	1001681325
+
+
+Mar 15, 2016
+Cho & Sean: 
+	- coded connecting peripherals with the main program
+	- read and re-discussed project ideas regarding lego parts
+		- lego switches were not as expected; might resort to PUSH BUTTONS on the FPGA
+	- read manual and discussed future plans
+		- will work on individual segments of code for different peripherals in the lab session
