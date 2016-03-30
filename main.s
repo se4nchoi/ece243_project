@@ -13,7 +13,7 @@
 
 .equ TIMER_BASE, 0xFF202000  # status i.e. timeout
 # 4 control (interrupt, continue, )
-.equ TICKS,	100000000		# 1/60 seconds
+.equ TICKS,	1666667		# 1/60 seconds
 
 .equ PS2_BASE, 0xFF200100 # mouse / keyboard; using MOUSE in this application
 
@@ -22,7 +22,17 @@
 .equ irq1, 0b10			#buttons
 .equ irq7, 0b10000000	#ps2 mouse
 
+## VGA
+.equ PIXEL_BUFFER_BASE, 0x08000000
+.equ CHAR_BUFFER_BASE, 0x09000000
 
+
+###################################################################
+#							DATA								  #
+###################################################################
+			.section .data 
+#BG_BASE: .byte 4
+BG_BASE: .incbin "W:/ece243/project/bg.bin"
 
 ###################################################################
 #						interrupt exceptions					  #
@@ -92,9 +102,9 @@ serve_g_timer:
 #																  #
 ###################################################################
 .section .text
-.global _start
+.global main
 
-_start: # main program
+main: # main program
 
 	# initialize stack pointer
 	movia sp, 0x03FFFFFC
@@ -126,6 +136,71 @@ _start: # main program
 	movui r9, 0x1 		# just button 0; change to F for all four buttons
 	stwio r9, 8(r8) 	# set interrupt masking
 	
+	
+	
+	# load the binary background image into VGA buffer
+	movia r16, PIXEL_BUFFER_BASE
+	movia r17, BG_BASE			# points to the loaded binary BMP file
+	
+	# for the entire screen space
+		# write pixel by pixel
+		# value of what ever the bg contains
+		
+			
+	call clear_screen
+	mov r18, zero		# col
+	mov r19, zero		# row
+	movia r20, 640		# col limit
+	movia r21, 480		# row limit
+	
+	
+	
+row_loop:
+	beq r19, r21, out 		# check if col == 240
+	
+	
+	addi r19,r19,1
+	mov r18, zero		# reset col counter
+col_loop:
+	beq r18, r20, row_loop # check if row == 320
+	
+	# calculate offset
+	mov r12, zero			# reset r12 = 0
+	mul r12, r20, r19 		# r12 = 320 * row
+	add r12, r12, r18		# r12 = 320 * row + col
+	
+	# RGB
+	add r12, r12, r17		# offset the BASE
+	ldh r6, 0(r12)				# color argument RGB
+	
+	# mov r9, r19
+	# slli r9, r9, 1
+	# mov r10, r20
+	# slli r10, r10, 10
+	
+	#add r8, r9, r10
+	#add r8, r8, r16		# pixel buffer
+		
+	
+	#sthio r6, 0(r8)
+	
+	
+	
+	
+	# ROW COL
+	mov r4, r18			# row argument
+	mov r5, r19			# col argument
+	
+	
+	
+	call write_pixel 	# r4,r5, RGB
+
+	addi r18,r18,1
+	
+	br col_loop
+	
+out:
+
 	
 	
 	

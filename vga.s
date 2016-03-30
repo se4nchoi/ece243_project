@@ -15,7 +15,7 @@
 .global _VGA 		# make this subroutine available for main.s
 
 _VGA:
-	
+	# template code
 
 
 	

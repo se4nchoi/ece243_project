@@ -27,7 +27,7 @@ void write_char(int x, int y, char c) {
   *character_buffer = c;
 }
 
-int main () {
+/* int main () {
 
    clear_screen();
    int x;
@@ -50,4 +50,4 @@ int main () {
 	 hw++;
    }
    return 0;
-}
+} */

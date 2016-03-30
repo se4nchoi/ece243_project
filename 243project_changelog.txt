@@ -3,7 +3,7 @@
 # Yea Hyun (Sean) Choi 		choiyea		999763448
 # Seunghyun Cho	 			choseun3	1001681325
 
-
+-----------------------------------------------------------------------------------------------
 Mar 15, 2016
 Cho & Sean: 
 	- coded connecting peripherals with the main program
@@ -11,3 +11,15 @@ Cho & Sean:
 		- lego switches were not as expected; might resort to PUSH BUTTONS on the FPGA
 	- read manual and discussed future plans
 		- will work on individual segments of code for different peripherals in the lab session
+-----------------------------------------------------------------------------------------------		
+
+Mar 16, 2016
+Together:
+	- uploaded files on a GitHub repository for team purposes
+	- fixed sean's errors in assigning wrong values for interrupt enables
+Sean:
+	- coded push button interrupt handler
+		= only turns LED lights on when pushed. will integrate game-specific actions later
+	- included vga.s on repository
+	
+-----------------------------------------------------------------------------------------------
